@@ -6,21 +6,21 @@ import (
 )
 
 type person struct {
-	First string
-	Last  string
-	age   int
+	First string `json:"first"`
+	Last  string `json:"last"`
+	Age   int    `json:"age"`
 }
 
 func main() {
 	p1 := person{
 		First: "Jm",
 		Last:  "Echavez",
-		age:   34,
+		Age:   34,
 	}
 	p2 := person{
 		First: "John Michael",
 		Last:  "Echavez",
-		age:   34,
+		Age:   34,
 	}
 
 	persons := []person{
@@ -33,4 +33,17 @@ func main() {
 
 	pr, _ := json.Marshal(persons)
 	fmt.Println(string(pr))
+
+	var unM []person
+	fmt.Println(unM)
+
+	err := json.Unmarshal(pr, &unM)
+	if err != nil {
+		fmt.Println("Error Unmarshal")
+	}
+	fmt.Println(unM)
+
+	for _, v := range unM {
+		fmt.Println(v.First, v.Last)
+	}
 }
